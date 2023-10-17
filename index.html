@@ -1,1 +1,173 @@
-Hello World!
+<!-- 
+	Author     : Arjun Laxman
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="icon" type="image/svg+xml" href="images/AL.svg">
+        <title>Arjun Laxman</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap&family=Charm&family=Pacifico&family=Roboto+Serif:opsz@8..144&family=Satisfy&display=swap" rel="stylesheet">
+        <style>
+			* {
+				box-sizing: border-box;
+				-webkit-tap-highlight-color: transparent;
+			}
+			html {
+				scroll-snap-type: y proximity;
+			}
+			body {
+				width: 100%;
+				padding: 0;
+				margin: 0;
+				background-color: black;
+				color: #000000;
+				position: absolute;
+				top: 0px;
+				font-size: 20px;
+				line-height: 2;
+				scrollbar-gutter: stable;
+			}
+			iframe {
+				border: none;
+			}
+			.page {
+				height: 100vh;
+				width: 100vw;
+				max-width: 100%;
+				position: relative;
+				scroll-snap-align: start;
+			}
+			#backgroundPic {
+				position: fixed;
+				background-image: url("images/waimea_canyon.jpeg");
+				background-position: center;
+				background-size: cover;
+			}
+			section {
+				padding: 20px;
+				position: relative;
+				display: flex;
+				font-family: 'Lato', sans-serif;
+				transform: translateY(100px);
+				transition: 0.5s transform ease, 0.5s opacity ease;
+				opacity: 0;
+				flex-direction: row;
+				padding: 50px 150px;
+			}
+			.visibleSection {
+				transform: translateY(0px);
+				opacity: 1;
+			}
+			.sectionHeader {
+				font-family: 'Lato', sans-serif;
+				font-size: 30px;
+			}
+			#headerTxt {
+				font-size: 6.5vw;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-family: 'Lato', cursive;
+				color: #ffffff;
+				position: absolute;
+				text-shadow: 0 0 3px #333333;
+				animation: fade 1s linear forwards;
+				animation-play-state: paused;
+				animation-delay: calc(var(--scroll) * -1s);
+			}
+			#page2 {
+				margin-top: 100vh;
+				opacity: 1;
+				z-index: 5;
+				box-shadow: 0 0 5px #000000;
+				background-color: #00000055;
+				backdrop-filter: blur(8px);
+				color: white;
+			}
+			#page2 section {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translateY(calc(-50% + 100px));
+				right: 0;
+				font-size: 45px;
+				padding: 0;
+			}
+			#page2 .visibleSection {
+				transform: translateY(-50%);
+			}
+			#headshot {
+				height: 90%;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+			}
+			@media only screen and (max-width: 800px) {
+				body {
+					font-size: 16px;
+				}
+				#intro {
+					flex-wrap: wrap;
+				}
+				#headerTxt {
+					font-size: 8vw;
+				}
+				section img {
+					height: 250px;
+					align-self: center;
+					margin: auto 0px;
+				}
+			}
+			@keyframes fade {
+				to {
+					opacity: 0;
+				}
+			}
+        </style>
+    </head>
+    <body onload="onloadFn()" onscroll="delayScrollAnim()">
+		<script>
+			window.addEventListener('scroll', () => {
+				document.body.style.setProperty('--scroll', window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+			}, false);
+			function onloadFn() {
+				window.addEventListener('scroll', () => {
+					document.body.style.setProperty('--scroll',
+						window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+				}, false);
+				delayScrollAnim();
+			}
+			function delayScrollAnim() {
+				var elts = document.getElementsByTagName("section");
+				for (let i = 0; i < elts.length; i++) {
+					if (window.innerHeight - elts[i].getBoundingClientRect().top >= 100) {
+						elts[i].classList.add("visibleSection")
+					}
+				}
+			}
+		</script>
+		<div class="page" id="backgroundPic" src="images/arjun_laxman.jpeg">
+			<div id="headerTxt">
+				Arjun Laxman
+			</div>
+		</div>
+		<div class="page" id="page2">
+			<img id="headshot" src="images/headshot.png">
+			<section>
+				Hi, I'm Arjun!
+			</section>
+		</div>
+		<!--
+		<section id="intro" style="flex-direction: row-reverse;">
+		</section>
+		<div id="videos" class="section">
+		</div>
+		<div id="footer"></div>
+		-->
+	</body>
+</html>
